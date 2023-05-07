@@ -22,6 +22,14 @@ router.post('/:id', (req, res) => {
     .catch(err => console.error(err))
 })
 
+router.post('/:id/delete', (req, res) => {
+  const _id = req.params.id
+  return Record.findOne({ _id })
+    .then(record => record.deleteOne())
+    .then(() => res.redirect('/'))
+    .catch(err => console.error(err))
+})
+
 router.get('/new', (req, res) => {
   Category.find()
     .lean()
