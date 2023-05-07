@@ -8,7 +8,8 @@ const Category = require('../../models/category')
 
 // routes
 router.get('/', async (req, res) => {
-  await Record.find()
+  const userId = req.user._id
+  await Record.find({ userId })
     .lean()
     .sort({ date: 'desc'})
     .then(records => {

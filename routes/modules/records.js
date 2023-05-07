@@ -19,7 +19,10 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const records = req.body
+  const records = {
+    ...req.body,
+    userId: req.user._id
+  }
   return Record.create(records)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
@@ -28,8 +31,9 @@ router.post('/', (req, res) => {
 // edit
 router.get('/:id/edit', async (req, res) => {
   try {
+    const userId = req.user._id
     const _id = req.params.id
-    const record = await Record.findOne({ _id }).lean()
+    const record = await Record.findOne({ _id, userId }).lean()
     const category = await Category.find().lean().sort({ id: 'asc' })
 
     res.render('edit', { record, category })
@@ -39,8 +43,11 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+  const records = {
+    ...req.body,
+    userId: req.user._id
+  }
   const id = req.params.id
-  const records = req.body
   return Record.findByIdAndUpdate(id, records)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
@@ -48,8 +55,9 @@ router.put('/:id', (req, res) => {
 
 // delete
 router.delete('/:id', (req, res) => {
+  const userId = req.user._id
   const _id = req.params.id
-  return Record.findOne({ _id })
+  return Record.findOne({ _id, userId })
     .then(record => record.deleteOne())
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
