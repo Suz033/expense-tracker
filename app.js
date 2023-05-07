@@ -4,6 +4,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const usePassport = require('./config/passport')  // after session
 
 // files
 const routes = require('./routes')
@@ -26,6 +27,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+// passport
+usePassport(app)  // before routes
 
 
 //// routes ////
