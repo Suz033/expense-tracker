@@ -32,6 +32,14 @@ app.use(session({
 usePassport(app)  // before routes
 
 
+//// auth state ////
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
+
 //// routes ////
 // index
 app.use('/', routes)

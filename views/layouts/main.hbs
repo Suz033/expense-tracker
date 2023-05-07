@@ -18,15 +18,20 @@
 <body>
   <header>
     {{!-- nav --}}
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="/">
-          <img src="/image/icon.svg" alt="Logo" width="30" height="30"
-            class="d-inline-block align-text-top">
-            <h3 class="mb-0 ms-2">家庭記帳本</h3>
-          
-        </a>
-      </div>
+    <nav class="navbar navbar-light bg-light justify-content-between" style="padding: 8px 16px;">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/image/icon.svg" alt="Logo" width="30" height="30"
+          class="d-inline-block align-text-top">
+          <h3 class="mb-0 ms-2">
+            {{#if isAuthenticated}}{{ user.name}}的{{else}}家庭{{/if}}記帳本
+          </h3>          
+      </a>
+
+      {{#if isAuthenticated}}
+      <a href="/users/logout" class="btn btn-outline-primary">Logout</a>
+      {{else}}
+      <a href="/users/login" class="btn btn-outline-primary">Login</a>
+      {{/if}}
     </nav>
   </header>
 
