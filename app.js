@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // files
 const routes = require('./routes')
@@ -18,6 +19,13 @@ app.use(express.urlencoded({ extended: true }))
 
 // method-override
 app.use(methodOverride('_method'))
+
+// session
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 
 //// routes ////
