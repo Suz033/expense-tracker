@@ -5,13 +5,13 @@
   </div>
 </div>
 
-<form action="/" method="post">
+<form action="/records/{{record._id}}" method="post">
   <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
     <div class="col-auto">
       <label for="name" class="col-form-label">名稱 *：</label>
     </div>
     <div class="col-auto">
-      <input type="text" id="name" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;">
+      <input type="text" id="name" name="name" value="{{record.name}}" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;">
     </div>
   </div>
 
@@ -20,7 +20,7 @@
       <label for="date" class="col-form-label">日期 *：</label>
     </div>
     <div class="col-auto">
-      <input type="date" id="date" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;">
+      <input type="date" id="date" name="date" value="{{record.date}}" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;">
     </div>
   </div>
 
@@ -29,12 +29,10 @@
       <label for="category" class="col-form-label">類別 *：</label>
     </div>
     <div class="col-auto">
-      <select class="form-select" id="category" aria-label="Default select example" style="width: 20rem;">
-        <option selected hidden>類別</option>
-        <option value="1">餐飲食品</option>
-        <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="4">家居物業</option>
+      <select class="form-select" id="category" name="categoryId" style="width: 20rem;">
+        {{#each category}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
       </select>
     </div>
   </div>
@@ -44,7 +42,7 @@
       <label for="amount" class="col-form-label">金額 *：</label>
     </div>
     <div class="col-auto">
-      <input type="number" id="amount" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0">
+      <input type="number" id="amount" name="amount" value="{{record.amount}}" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0">
     </div>
   </div>
 

@@ -9,8 +9,15 @@ const Category = require('../../models/category')
 // routes
 router.post('/', (req, res) => {
   const records = req.body
-  console.log(records)
   return Record.create(records)
+    .then(() => res.redirect('/'))
+    .catch(err => console.error(err))
+})
+
+router.post('/:id', (req, res) => {
+  const id = req.params.id
+  const records = req.body
+  return Record.findByIdAndUpdate(id, records)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })
@@ -19,8 +26,22 @@ router.get('/new', (req, res) => {
   Category.find()
     .lean()
     .sort({ id: 'asc' })
-    .then(categories => res.render('new', { categories }))  
+    .then(categories => res.render('new', { categories }))
+    .catch(err => console.error(err)) 
+  })
+  
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const _id = req.params.id
+    const record = await Record.findOne({ _id }).lean()
+    const category = await Category.find().lean().sort({ id: 'asc' })
+
+    res.render('edit', { record, category })
+  } catch (err) {
+    console.error(err)
+  }
 })
+
 
 router.get('/edit', (req, res) => {
   res.render('edit')
