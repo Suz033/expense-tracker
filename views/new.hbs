@@ -1,0 +1,56 @@
+<div class="text-center m-3">
+  <h2>請輸入你的支出</h2>
+  <div id="passwordHelpBlock" class="form-text">
+    * 為必填欄位
+  </div>
+</div>
+
+<form action="/" method="post">
+  <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+    <div class="col-auto">
+      <label for="name" class="col-form-label">名稱 *：</label>
+    </div>
+    <div class="col-auto">
+      <input type="text" id="name" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;">
+    </div>
+  </div>
+
+  <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+    <div class="col-auto">
+      <label for="date" class="col-form-label">日期 *：</label>
+    </div>
+    <div class="col-auto">
+      <input type="date" id="date" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;">
+    </div>
+  </div>
+
+  <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+    <div class="col-auto">
+      <label for="category" class="col-form-label">類別 *：</label>
+    </div>
+    <div class="col-auto">
+      <select class="form-select" id="category" aria-label="Default select example" style="width: 20rem;">
+        <option selected hidden>類別</option>
+        <option value="1">餐飲食品</option>
+        <option value="2">交通出行</option>
+        <option value="3">休閒娛樂</option>
+        <option value="4">家居物業</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-3 align-items-center d-flex justify-content-center mb-3">
+    <div class="col-auto">
+      <label for="amount" class="col-form-label">金額 *：</label>
+    </div>
+    <div class="col-auto">
+      <input type="number" id="amount" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0">
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3 mb-5">
+    <a href="/" class="btn btn-danger">取消</a>
+    <button class="btn btn-primary ms-3">新增支出</button>
+  </div>
+
+</form>
