@@ -4,7 +4,7 @@ const router = express.Router()
 
 // files
 const home = require('./modules/home')
-const expenses = require('./modules/expenses')
+const expenses = require('./modules/records')
 
 // routes
 router.use('/', home)
