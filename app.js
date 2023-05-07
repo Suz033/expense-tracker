@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 
 // files
 const routes = require('./routes')
@@ -14,6 +15,9 @@ app.set('view engine', 'hbs')
 
 // body-parser (before setting route)
 app.use(express.urlencoded({ extended: true }))
+
+// method-override
+app.use(methodOverride('_method'))
 
 
 //// routes ////
