@@ -12,6 +12,10 @@ router.get('/', async (req, res) => {
   try {
     const records = await Record.find({ userId }).lean().sort({ date: 'desc' })
 
+    const totalAmount = records.reduce(function (total, record) {
+      return total + record.amount
+    }, 0)
+
     const modifiedRecords = await Promise.all(records.map(async (record) => {
       // modify date format: yyyy/mm/dd
       record.date = record.date.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
@@ -27,7 +31,7 @@ router.get('/', async (req, res) => {
     
     const { record, category } = modifiedRecords
     
-    res.render('index', { modifiedRecords })
+    res.render('index', { totalAmount, modifiedRecords })
     // console.log(modifiedRecords)
   } catch (err) {
     console.error(err)
