@@ -1,10 +1,12 @@
 <div class="d-flex justify-content-center m-2">
-  <select class="form-select" aria-label="Default select example">
-    <option selected>全部</option>
-    {{#each modifiedRecords}}
-    <option value="{{ this.category._id }}">{{ this.category.name }}</option>
-    {{/each}}
-  </select>
+  <form class="input-group" action="/search" method="get">
+    <select class="form-select" name="categoryId" id="categoryId" onchange="submit()">
+      <option value="">全部</option>
+      {{#each categories}}
+      <option value="{{ this._id }}" {{#if this.selected}} selected {{/if}}>{{ this.name }}</option>
+      {{/each}}
+    </select>
+  </form>
 </div>
 
 <div class="d-flex justify-content-between m-3">
@@ -13,11 +15,11 @@
 </div>
 
 <ul class="list-group">
-  {{#if modifiedRecords}}
-    {{#each modifiedRecords}}
+  {{#if records}}
+    {{#each records}}
     <li class="list-group-item">
       <div class="d-flex justify-content-between align-items-center">
-        <i class="{{ this.category.icon }} ms-3" style="max-width: 1rem;"></i>
+        <i class="{{ this.categoryIcon.icon }} ms-3" style="max-width: 1rem;"></i>
         <div class="d-flex flex-column flex-grow-1 ms-5">
           <p class="m-0">{{ this.record.name }}</p>
           <p class="m-0">{{ this.record.date }}</p>
