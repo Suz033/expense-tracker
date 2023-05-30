@@ -27,8 +27,8 @@ db.once('open', () => {
     },
   ]
   Promise.all(
-    category.map((ele, index) => {
-      return Category.create({ id: index + 1 ,name: ele.name, icon: ele.icon })
+    category.map((ele) => {
+      return Category.create({ name: ele.name, icon: ele.icon })
     })
   )
   .then(() => {
