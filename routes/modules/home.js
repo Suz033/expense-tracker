@@ -9,25 +9,31 @@ const Category = require('../../models/category')
 // routes
 router.get('/', async (req, res) => {
   const userId = req.user._id
-  await Record.find({ userId })
-    .lean()
-    .sort({ date: 'desc'})
-    .then(records => {
-      return Promise.all(        
-        records.map(async record => {
-          // modify date format: yyyy/mm/dd
-          record.date = record.date.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
+  try {
+    const records = await Record.find({ userId }).lean().sort({ date: 'desc' })
 
-          // return category icon
-          const category = await Category.findOne({ id: record.categoryId })
-          record.icon = category.icon
+    const modifiedRecords = await Promise.all(records.map(async (record) => {
+      // modify date format: yyyy/mm/dd
+      record.date = record.date.toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' })
 
-          return record
-        })
-      )
-    })
-    .then(records => res.render('index', { records }))
-    .catch(err => console.error(err))
+      const category = await Category.findOne({ _id: record.categoryId }).lean()
+      
+      if (category) {
+        record.icon = category.icon
+      }
+      
+      return { record, category }
+    }))
+    
+    const { record, category } = modifiedRecords
+    console.log(modifiedRecords)
+    
+    res.render('index', { modifiedRecords })
+    // console.log(modifiedRecords)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Internal Server Error')
+  }
 })
 
 // exports

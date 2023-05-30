@@ -1,11 +1,9 @@
 <div class="d-flex justify-content-center m-2">
   <select class="form-select" aria-label="Default select example">
-    <option selected hidden>類別</option>
-    <option value="1">餐飲食品</option>
-    <option value="2">交通出行</option>
-    <option value="3">休閒娛樂</option>
-    <option value="4">家居物業</option>
-    <option value="5">其他</option>
+    <option selected hidden>全部</option>
+    {{#each modifiedRecords}}
+    <option value="{{@index}}">{{this.category.name}}</option>
+    {{/each}}
   </select>
 </div>
 
@@ -15,24 +13,30 @@
 </div>
 
 <ul class="list-group">
-  {{#each records}}
-  <li class="list-group-item">
-    <div class="d-flex justify-content-between align-items-center">
-      <i class="{{this.icon}} ms-3" style="max-width: 1rem;"></i>
-      <div class="d-flex flex-column flex-grow-1 ms-5">
-        <p class="m-0">{{this.name}}</p>
-        <p class="m-0">{{this.date}}</p>
+  {{#if modifiedRecords}}
+    {{#each modifiedRecords}}
+    <li class="list-group-item">
+      <div class="d-flex justify-content-between align-items-center">
+        <i class="{{this.category.icon}} ms-3" style="max-width: 1rem;"></i>
+        <div class="d-flex flex-column flex-grow-1 ms-5">
+          <p class="m-0">{{this.record.name}}</p>
+          <p class="m-0">{{this.record.date}}</p>
+        </div>
+        <div class="me-3">
+          {{this.record.amount}}
+        </div>
+        <a href="/records/{{this.record._id}}/edit" class="btn btn-primary ms-2">修改</a>
+        <form action="/records/{{this.record._id}}?_method=DELETE" method="post">
+          <button class="btn btn-danger ms-2">刪除</button>
+        </form>
       </div>
-      <div class="me-3">
-        {{this.amount}}
-      </div>
-      <a href="/records/{{this._id}}/edit" class="btn btn-primary ms-2">修改</a>
-      <form action="/records/{{this._id}}?_method=DELETE" method="post">
-        <button class="btn btn-danger ms-2">刪除</button>
-      </form>
-    </div>
-  </li>
-  {{/each}}
+    </li>
+    {{/each}}
+    {{else}}
+    <li class="list-group-item mb-3">
+      <h3 class="text-center mt-2">尚無支出紀錄</h3>
+    </li>
+  {{/if}}
 </ul>
 <div class="d-flex justify-content-center mt-3 mb-5">
   <a href="/records/new" class="btn btn-primary">新增支出</a>
