@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
     }))
     
     const { record, category } = modifiedRecords
-    console.log(modifiedRecords)
     
     res.render('index', { modifiedRecords })
     // console.log(modifiedRecords)

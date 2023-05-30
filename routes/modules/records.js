@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
     ...req.body,
     userId: req.user._id
   }
+
   return Record.create(records)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
@@ -43,12 +44,13 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+  const _id = req.params.id
   const records = {
     ...req.body,
     userId: req.user._id
   }
-  const id = req.params.id
-  return Record.findByIdAndUpdate(id, records)
+  
+  return Record.findByIdAndUpdate(_id, records)
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })
