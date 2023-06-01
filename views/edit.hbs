@@ -11,7 +11,7 @@
       <label for="name" class="col-form-label">名稱 *：</label>
     </div>
     <div class="col-auto">
-      <input type="text" id="name" name="name" value="{{record.name}}" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;">
+      <input type="text" id="name" name="name" value="{{record.name}}" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;" required>
     </div>
   </div>
 
@@ -20,7 +20,7 @@
       <label for="date" class="col-form-label">日期 *：</label>
     </div>
     <div class="col-auto">
-      <input type="date" id="date" name="date" value="{{record.date}}" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;">
+      <input type="date" id="date" name="date" value="{{ recordDate }}" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;" required>
     </div>
   </div>
 
@@ -30,8 +30,9 @@
     </div>
     <div class="col-auto">
       <select class="form-select" id="category" name="categoryId" style="width: 20rem;">
+        <option selected hidden value="{{ categoryData._id }}">{{ categoryData.name }}</option>
         {{#each category}}
-        <option value="{{this._id}}">{{this.name}}</option>
+        <option value="{{ this._id }}">{{ this.name }}</option>
         {{/each}}
       </select>
     </div>
@@ -42,7 +43,7 @@
       <label for="amount" class="col-form-label">金額 *：</label>
     </div>
     <div class="col-auto">
-      <input type="number" id="amount" name="amount" value="{{record.amount}}" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0">
+      <input type="number" id="amount" name="amount" value="{{record.amount}}" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0" required>
     </div>
   </div>
 

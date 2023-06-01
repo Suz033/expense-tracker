@@ -11,7 +11,7 @@
       <label for="name" class="col-form-label">名稱 *：</label>
     </div>
     <div class="col-auto">
-      <input type="text" id="name" name="name" placeholder="請輸入消費名稱" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;">
+      <input type="text" id="name" name="name" placeholder="請輸入消費名稱" class="form-control" aria-labelledby="nameHelpInline" style="width: 20rem;" required>
     </div>
   </div>
 
@@ -20,7 +20,7 @@
       <label for="date" class="col-form-label">日期 *：</label>
     </div>
     <div class="col-auto">
-      <input type="date" id="date" name="date" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;">
+      <input type="date" id="date" name="date" class="form-control" aria-labelledby="dateHelpInline" style="width: 20rem;" required>
     </div>
   </div>
 
@@ -30,7 +30,6 @@
     </div>
     <div class="col-auto">
       <select class="form-select" id="category" name="categoryId" aria-label="Default select example" style="width: 20rem;">
-        <option selected hidden>請選擇消費類別</option>
         {{#each categories}}
         <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
@@ -43,7 +42,7 @@
       <label for="amount" class="col-form-label">金額 *：</label>
     </div>
     <div class="col-auto">
-      <input type="number" id="amount" name="amount" placeholder="請輸入消費金額" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0">
+      <input type="number" id="amount" name="amount" placeholder="請輸入消費金額" class="form-control" aria-labelledby="amountHelpInline" style="width: 20rem;" min="0" required>
     </div>
   </div>
 
